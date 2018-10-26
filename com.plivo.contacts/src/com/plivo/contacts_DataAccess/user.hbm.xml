@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 5.3//EN"  
+ "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd">  
+ 
+ <hibernate-mapping>  
+  <class name="com.plivo.contacts_Model.User" table="users">  
+    <id name="email" column="email"/>  
+            
+    <property name="name"></property>  
+    <property name="password"></property>
+    <property name="password_salt"></property>
+    
+            
+  </class>  
+            
+ </hibernate-mapping>  

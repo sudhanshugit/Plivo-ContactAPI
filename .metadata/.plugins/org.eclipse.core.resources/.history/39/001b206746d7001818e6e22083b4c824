@@ -1,0 +1,25 @@
+package tempproj;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+
+import com.plivo.contacs_passwordManagement.*;
+public class PasswordGenerator {
+
+	public static void main(String[] args) {
+		PasswordSet p = PasswordManagement.encryptPassword("plivo_user");
+		String s = Arrays.toString(p.salt);
+		System.out.println(s);
+		System.out.println(p.encryptedPassword);
+		String salts = s.toString();
+		System.out.println(salts);
+		byte[] cb = salts.getBytes(StandardCharsets.UTF_16);
+		System.out.println(cb);
+		String pe = PasswordManagement.checkPassword("plivo_user", p.salt);
+		String pe1 = PasswordManagement.checkPassword("plivo_user", cb);
+		System.out.println(pe);
+		System.out.println(pe1);
+
+	}
+
+}

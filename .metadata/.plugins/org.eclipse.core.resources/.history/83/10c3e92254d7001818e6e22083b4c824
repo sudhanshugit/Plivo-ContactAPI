@@ -1,0 +1,18 @@
+package com.plivo.contacts_API;
+
+import org.glassfish.jersey.filter.LoggingFilter;
+import org.glassfish.jersey.server.ResourceConfig;
+
+ 
+public class CustomApplication extends ResourceConfig
+{
+    public CustomApplication()
+    {
+        packages("com.howtodoinjava.jersey");
+        //register(LoggingFilter.class);
+        //register(GsonMessageBodyHandler.class);
+ 
+        //Register Auth Filter here
+        register(UserAuthenticationFilter.class);
+    }
+}

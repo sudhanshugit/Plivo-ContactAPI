@@ -1,0 +1,81 @@
+package com.plivo.contacts_DataAccess;
+
+
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Session;  
+import org.hibernate.SessionFactory;  
+import org.hibernate.Transaction;  
+import org.hibernate.boot.Metadata;  
+import org.hibernate.boot.MetadataSources;  
+import org.hibernate.boot.registry.StandardServiceRegistry;  
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+import com.plivo.contacs_passwordManagement.PasswordManagement;
+import com.plivo.contacts_Model.Contact;
+import com.plivo.contacts_Model.PasswordSet;  
+
+
+public class ContactAccess {
+	
+	Metadata meta;
+	SessionFactory factory;
+	
+	public ContactAccess() {
+		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();  
+        meta = new MetadataSources(ssr).getMetadataBuilder().build();
+        factory = meta.getSessionFactoryBuilder().build();
+	}
+	
+	
+	public void addContact() {
+		Session session = factory.openSession();  
+	    Transaction t = session.beginTransaction();
+	    
+	}
+	
+	public void deleteContact() {
+		  
+	    Session session = factory.openSession();  
+	    Transaction t = session.beginTransaction();
+	}
+	
+	public void updateContact() {
+		  
+	    Session session = factory.openSession();  
+	    Transaction t = session.beginTransaction();
+	}
+	
+	public Contact getContactByEmail(String email){
+		Session session = factory.openSession();  
+	    Transaction t = session.beginTransaction();
+		
+		
+		Contact c = new Contact();
+		
+		return c;
+	}
+	
+	public List<Contact> getContactByName(String email){
+		
+		Session session = factory.openSession();  
+	    Transaction t = session.beginTransaction();
+		List<Contact> lc;
+		
+		return lc;
+		
+	}
+	
+	public List<Contact> getContacts(String email){
+		Session session = factory.openSession();  
+	    Transaction t = session.beginTransaction();
+		List<Contact> lc;
+		
+		return lc;
+		
+	}
+
+}
+
+

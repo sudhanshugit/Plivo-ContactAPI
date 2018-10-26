@@ -1,0 +1,16 @@
+package com.plivo.contacts_DataAccess;
+import com.plivo.contacs_passwordManagement.*;
+
+public class UserAccess {
+	public void addUser(String userName, String password) {
+		
+		PasswordSet p = PasswordManagement.encryptPassword(password);
+		
+				
+	}
+	
+	public PasswordSet p =  fetchUser(String userName) {
+		
+	}
+
+}

@@ -1,0 +1,19 @@
+package com.plivo.contacts_API;
+
+import java.util.List;
+
+import com.plivo.contacts_Model.*;
+
+public interface ContactsServiceInterface {
+	
+	public Response addContact(Contact c);
+	public Response deleteContact(String email);
+	public Response updateContact(String email);
+	public List<Contact> getContactsByEmail(String email);
+	public List<Contact> getContactsByName(String name);
+	// to demo pagination;
+	public List<Contact> getContacts(int pageSize, int pageNumber);
+	
+	public Response addUser(User u);
+	public Response getUser(String email, String password);
+}

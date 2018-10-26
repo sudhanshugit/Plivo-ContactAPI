@@ -1,0 +1,14 @@
+1540347913924	Delete element
+1540347975992	Delete element
+1540348338392	Delete element
+1540351696538	Rename type 'Contacts'
+1540351710537	Rename type 'Users'
+1540354747440	Copy package
+1540488574031	Copy compilation unit
+1540488601018	Delete element
+1540542759878	Move file
+1540543184040	Move 'hibernate.cfg.xml' to 'contacts_DataAccess'
+1540543193705	Delete element
+1540549511334	Rename field 'salt'
+1540549572342	Rename field 'dateAdded'
+1540549616697	Rename field 'phone'

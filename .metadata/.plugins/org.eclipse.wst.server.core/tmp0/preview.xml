@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<server port="8080">
+  <module context="com.plivo.contacts" name="com.plivo.contacts" path="/home/kumar/Eclipse_Related_Packages/Plivo/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/com.plivo.contacts" type="j2ee"/>
+</server>

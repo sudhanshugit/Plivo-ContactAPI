@@ -1,0 +1,146 @@
+package com.plivo.contacts_DataAccess;
+
+
+import java.util.Date;
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Session;  
+import org.hibernate.SessionFactory;  
+import org.hibernate.Transaction;  
+import org.hibernate.boot.Metadata;  
+import org.hibernate.boot.MetadataSources;  
+import org.hibernate.boot.registry.StandardServiceRegistry;  
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+import com.plivo.contacs_passwordManagement.PasswordManagement;
+import com.plivo.contacts_Model.Contact;
+import com.plivo.contacts_Model.PasswordSet;
+import com.plivo.contacts_Model.User;  
+
+
+public class ContactAccess {
+	
+	
+	SessionFactory factory;
+	public ContactAccess() {
+		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();  
+        Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+        factory = meta.getSessionFactoryBuilder().build();
+	}
+	public int addContact(Contact ctct) {
+		
+		String name = ctct.getName();
+		String email = ctct.getEmail();
+		String phone = ctct.getPhone_no();
+		String address = ctct.getAddress();
+		
+		Session session = factory.openSession();  
+	    Transaction t = session.beginTransaction();
+	    
+	    Query q = session.createQuery("from Contact where email = :email");
+	    q.setString("email", email);
+	    List<Contact> cl = q.list();
+	    if(cl.isEmpty())
+	    {
+	    	Contact c = new Contact();
+	    	c.setName(name);
+		    c.setEmail(email);
+		    c.setPhone_no(phone);
+		    c.setAddress(address);
+		    c.setDate_added(new Date());
+		    session.save(c);
+		    t.commit();
+		    return 1;
+	    }
+	    else {
+	    	return 0;
+	    }
+	    
+	}
+	
+	public int deleteContact(String email) {
+		  
+	    Session session = factory.openSession();  
+	    Transaction t = session.beginTransaction();
+	    
+	    Query q = session.createQuery("from Contact where email = :email");
+	    q.setString("email", email);
+	    List<Contact> cl = q.list();
+	    if(cl.isEmpty()) {
+	    	return 0;
+	    }
+	    q = session.createQuery("delete from Contact where email = :email");
+	    q.setString("email", email);
+	    q.executeUpdate();
+	    return 1;
+	    
+	}
+	
+	public int updateContact(Contact c) {
+		  
+		
+		String name = c.getName();
+		String email = c.getEmail();
+		String phone = c.getPhone_no();
+		String address = c.getAddress();
+		
+	    Session session = factory.openSession();  
+	    Transaction t = session.beginTransaction();
+	    
+	    Query q = session.createQuery("from Contact where email = :email");
+	    q.setString("email", email);
+	    List<Contact> cl = q.list();
+	    if(cl.isEmpty()) {
+	    	return 0;
+	    }
+	    
+	    q = session.createQuery("update Contact set name=:name, phone=:phone, address=:address  where email = :email");
+	    q.setString("email", email);
+	    q.setString("name", name);
+	    q.setString("phone", phone);
+	    q.setString("address", address);
+	    q.executeUpdate();
+	    return 1;
+	    
+	}
+	
+	public Contact getContactByEmail(String email){
+		Session session = factory.openSession();  
+	    Transaction t = session.beginTransaction();
+	    Query q = session.createQuery("from Contact where email = :email");
+	    q.setString("email", email);
+	    Contact c = (Contact)q.uniqueResult();
+	    
+	    return c;
+	}
+	
+	public List<Contact> getContactByName(String name, int pageSize, int startVal){
+		
+		Session session = factory.openSession();  
+	    Transaction t = session.beginTransaction();
+		List<Contact> lc;
+		
+		Query q = session.createQuery("from Contact where name = :name");
+	    q.setString("name", name);
+	    q.setFirstResult(startVal); //starts with 0
+		q.setFetchSize(pageSize);
+	    lc = q.list();
+		return lc;
+		
+	}
+	
+	public List<Contact> getContacts(int pageSize, int startVal){
+		Session session = factory.openSession();  
+	    Transaction t = session.beginTransaction();
+		List<Contact> lc;
+		
+		Query q = session.createQuery("from Contact");
+	    q.setFirstResult(startVal); //starts with 0
+		q.setFetchSize(pageSize);
+	    lc = q.list();
+		return lc;
+	}
+}
+
+

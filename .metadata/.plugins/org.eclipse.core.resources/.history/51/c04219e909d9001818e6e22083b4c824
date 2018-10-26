@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 5.3//EN"  
+ "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd">  
+ 
+ 
+ <hibernate-mapping>  
+  <class name="com.plivo.contacts_Model.Contact" table="contacts">  
+    <id name="email" column="email"/>  
+            
+    <property name="dateAdded" column="date_added"></property>
+    <property name="phone" column="phone_no"></property>
+    <property name="address" column="address"></property>
+    <property name="name" column="name"></property>        
+  </class>  
+            
+ </hibernate-mapping>  

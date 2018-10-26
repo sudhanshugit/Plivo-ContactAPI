@@ -1,0 +1,99 @@
+package com.plivo.contacts_DataAccess;
+
+
+import java.util.Date;
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Session;  
+import org.hibernate.SessionFactory;  
+import org.hibernate.Transaction;  
+import org.hibernate.boot.Metadata;  
+import org.hibernate.boot.MetadataSources;  
+import org.hibernate.boot.registry.StandardServiceRegistry;  
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+import com.plivo.contacs_passwordManagement.PasswordManagement;
+import com.plivo.contacts_Model.Contact;
+import com.plivo.contacts_Model.PasswordSet;  
+
+
+public class ContactAccess {
+	
+	
+	SessionFactory factory;
+	public ContactAccess() {
+		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();  
+        meta = new MetadataSources(ssr).getMetadataBuilder().build();
+        factory = meta.getSessionFactoryBuilder().build();
+	}
+	public void addContact(String name,String email,String phone, String address) {
+		Session session = factory.openSession();  
+	    Transaction t = session.beginTransaction();
+	    Contact c = new Contact();
+	    c.setName(name);
+	    c.setEmail(email);
+	    c.setPhone(phone);
+	    c.setAddress(address);
+	    c.setDateAdded(new Date());
+	    session.save(c);
+	    t.commit();
+	    
+	}
+	
+	public void deleteContact(String email) {
+		  
+	    Session session = factory.openSession();  
+	    Transaction t = session.beginTransaction();
+	    
+	    Query q = session.createQuery("delete from Contact where email = :email");
+	    q.setString("email", email);
+	    q.executeUpdate();
+	    
+	}
+	
+	public void updateContact(String name,String email,String phone, String address) {
+		  
+	    Session session = factory.openSession();  
+	    Transaction t = session.beginTransaction();
+	    Query q = session.createQuery("update Contact set name=:name, phone=:phone, address=:address  where email = :email");
+	    q.setString("email", email);
+	    q.setString("name", name);
+	    q.setString("phone", phone);
+	    q.setString("address", address);
+	    q.executeUpdate();
+	    
+	}
+	
+	public Contact getContactByEmail(String email){
+		Session session = factory.openSession();  
+	    Transaction t = session.beginTransaction();
+		
+		
+		Contact c = new Contact();
+		
+		return c;
+	}
+	
+	public List<Contact> getContactByName(String email, int pageSize, int startVal){
+		
+		Session session = factory.openSession();  
+	    Transaction t = session.beginTransaction();
+		List<Contact> lc;
+		
+		return lc;
+		
+	}
+	
+	public List<Contact> getContacts(String email, int pageSize, int startVal){
+		Session session = factory.openSession();  
+	    Transaction t = session.beginTransaction();
+		List<Contact> lc;
+		
+		return lc;
+		
+	}
+
+}
+
+

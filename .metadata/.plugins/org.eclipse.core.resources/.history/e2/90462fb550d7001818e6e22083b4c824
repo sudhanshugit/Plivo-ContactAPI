@@ -1,0 +1,29 @@
+package com.plivo.contacts_API;
+
+import java.util.List;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("/Operate")
+public class ContactsOperationService {
+	
+	@GET
+	@Produces(MediaType.APPLICATION_XML)
+	@Path("/{id}/searchemail")
+	public String searchUsersWithEmail(@PathParam("id") String email){
+		return "<start>"+email+"</start>";
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_XML)
+	@Path("/{id}/searchname")
+	public String searchUsersWithEmail(@PathParam("id") String email){
+		return "<start>"+email+"</start>";
+	}
+	
+	
+}

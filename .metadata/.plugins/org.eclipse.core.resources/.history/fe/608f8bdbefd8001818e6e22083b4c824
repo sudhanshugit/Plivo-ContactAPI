@@ -1,0 +1,87 @@
+package com.plivo.contacts_API;
+
+import java.util.List;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import com.plivo.contacts_DataAccess.ContactAccess;
+import com.plivo.contacts_Model.*;
+
+@Path("/Operate")
+public class ContactsOperationService {
+	
+	@POST
+    @Path("/addContact")
+	public Response addContact(Contact c) {
+		Response response = new Response();
+		ContactAccess ca = new ContactAccess();
+		int retVal = ca.addContact(c);
+		if(retVal == 1) {
+			response.setMessage("Contact added");
+			response.setStatus(true);
+		}
+		else {
+			esponse.setMessage("Contact not added");
+			response.setStatus(false);
+		}
+		
+		return response;
+	}
+	
+	@POST
+	@Path("/deleteContact")
+	public Response deleteContact(String email){
+		Response response = new Response();
+		ContactAccess ca = new ContactAccess();
+		int retVal = ca.deleteContact(email);
+		if(retVal == 1) {
+			response.setMessage("Delete Successful");
+			response.setStatus(true);
+		}
+		else{
+			response.setMessage("Delete failed");
+			response.setStatus(false);
+		}
+		return response;
+	}
+	
+	
+	
+	
+	@GET
+	@Produces(MediaType.APPLICATION_XML)
+	@Path("/{id}/searchbyemail")
+	public Contact searchUsersByEmail(@PathParam("id") String email){
+		ContactAccess ca = new ContactAccess();
+		Contact c = ca.getContactByEmail(email);
+		return c;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_XML)
+	@Path("/{id}/searchbyname")
+	public List<Contact> searchUsersByName(@PathParam("id") String email){
+		ContactAccess ca = new ContactAccess();
+		
+		return "<start>"+email+"</start>";
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_XML)
+	@Path("/allcontact")
+	public List<Contact> searchUsersByName(){
+		ContactAccess ca = new ContactAccess();
+		List<Contact> = 
+		return "<start>"+email+"</start>";
+	}
+	
+	
+	
+	
+	
+}

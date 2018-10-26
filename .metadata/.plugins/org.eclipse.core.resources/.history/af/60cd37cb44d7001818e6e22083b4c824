@@ -1,0 +1,16 @@
+package tempproj;
+
+import com.plivo.contacs_passwordManagement.*;
+public class PasswordGenerator {
+
+	public static void main(String[] args) {
+		PasswordSet p = PasswordManagement.encryptPassword("plivo_user");
+		System.out.println(p.salt);
+		System.out.println(p.encryptedPassword);
+		
+		PasswordManagement.checkPassword("plivo_user", p.salt);
+		
+
+	}
+
+}
