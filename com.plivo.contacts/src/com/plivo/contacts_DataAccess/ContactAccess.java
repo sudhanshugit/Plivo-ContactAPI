@@ -60,26 +60,29 @@ public class ContactAccess {
 	}
 	
 	public int deleteContact(String email) {
-		  
-	    Session session = factory.openSession();  
-	    Transaction t = session.beginTransaction();
-	    
-	    Query q = session.createQuery("from Contact where email = :email");
-	    q.setString("email", email);
-	    List<Contact> cl = q.list();
-	    if(cl.isEmpty()) {
-	    	return 0;
-	    }
-	    q = session.createQuery("delete from Contact where email = :email");
-	    q.setString("email", email);
-	    q.executeUpdate();
+		try {  
+		    Session session = factory.openSession();  
+		    Transaction t = session.beginTransaction();
+		    
+		    Query q = session.createQuery("from Contact where email = :email");
+		    q.setString("email", email);
+		    List<Contact> cl = q.list();
+		    if(cl.isEmpty()) {
+		    	return 0;
+		    }
+		    q = session.createQuery("delete from Contact where email = :email");
+		    q.setString("email", email);
+		    q.executeUpdate();
+		    t.commit();
+		}
+		catch (Exception e) {
+			throw e;
+		}
 	    return 1;
 	    
 	}
 	
 	public int updateContact(Contact c) {
-		  
-		
 		String name = c.getName();
 		String email = c.getEmail();
 		String phone = c.getPhone_no();
@@ -95,12 +98,13 @@ public class ContactAccess {
 	    	return 0;
 	    }
 	    
-	    q = session.createQuery("update Contact set name=:name, phone=:phone, address=:address  where email = :email");
+	    q = session.createQuery("update Contact set name=:name, phone_no=:phone, address=:address  where email = :email");
 	    q.setString("email", email);
 	    q.setString("name", name);
 	    q.setString("phone", phone);
 	    q.setString("address", address);
 	    q.executeUpdate();
+	    t.commit();
 	    return 1;
 	    
 	}

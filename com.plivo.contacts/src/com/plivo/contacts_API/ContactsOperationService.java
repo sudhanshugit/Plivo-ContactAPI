@@ -19,7 +19,8 @@ public class ContactsOperationService {
 	
 	@POST
     @Path("/addContact")
-	@Consumes(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	public Response addContact(Contact c) {
 		Response response = new Response();
 		ContactAccess ca = new ContactAccess();
@@ -38,16 +39,25 @@ public class ContactsOperationService {
 	
 	@POST
 	@Path("/deleteContact")
-	@Consumes(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	public Response deleteContact(String email){
 		Response response = new Response();
-		ContactAccess ca = new ContactAccess();
-		int retVal = ca.deleteContact(email);
-		if(retVal == 1) {
-			response.setMessage("Delete Successful");
-			response.setStatus(true);
+		try {
+			
+			ContactAccess ca = new ContactAccess();
+			int retVal = ca.deleteContact(email);
+			if(retVal == 1) {
+				response.setMessage("Delete Successful");
+				response.setStatus(true);
+			}
+			else{
+				response.setMessage("Delete failed");
+				response.setStatus(false);
+			}
 		}
-		else{
+		catch(Exception e){
+			//log e.message;
 			response.setMessage("Delete failed");
 			response.setStatus(false);
 		}
@@ -56,7 +66,8 @@ public class ContactsOperationService {
 	
 	@POST
 	@Path("/updateContact")
-	@Consumes(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	public Response updateContact(Contact c){
 		Response response = new Response();
 		ContactAccess ca = new ContactAccess();
@@ -75,7 +86,7 @@ public class ContactsOperationService {
 	
 	@GET
 	@Path("/{id}/searchbyemail")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	public Contact searchUsersByEmail(@PathParam("id") String email){
 		ContactAccess ca = new ContactAccess();
 		Contact c = ca.getContactByEmail(email);
@@ -83,7 +94,7 @@ public class ContactsOperationService {
 	}
 	
 	@GET
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	@Path("/{id}/searchbyname")
 	public List<Contact> searchUsersByName(@PathParam("id") String name,
 											@QueryParam("pageSize") int pageSize,
@@ -95,7 +106,7 @@ public class ContactsOperationService {
 	}
 	
 	@GET
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	@Path("/allcontact")
 	public List<Contact> getAllUsers(@QueryParam("pageSize") int pageSize,
 											@QueryParam("pageStart") int pageStart){

@@ -1,0 +1,15 @@
+0:0:0:0:0:0:0:1 - - [28/Oct/2018:14:59:45 +0530] "POST /com.plivo.contacts/plivo/Operate/deleteContact HTTP/1.1" 200 55
+127.0.0.1 - - [28/Oct/2018:15:18:51 +0530] "GET / HTTP/1.1" 404 1074
+127.0.0.1 - - [28/Oct/2018:15:18:53 +0530] "GET /com.plivo.contacts/ HTTP/1.1" 404 1097
+0:0:0:0:0:0:0:1 - - [28/Oct/2018:15:19:03 +0530] "GET /com.plivo.contacts/plivo/Operate/sud42@abc.com/searchbyemail HTTP/1.1" 200 147
+0:0:0:0:0:0:0:1 - - [28/Oct/2018:15:25:58 +0530] "POST /com.plivo.contacts/plivo/Operate/updateContact HTTP/1.1" 500 8872
+0:0:0:0:0:0:0:1 - - [28/Oct/2018:16:27:28 +0530] "GET /com.plivo.contacts/plivo/Operate/sud42@abc.com/searchbyemail HTTP/1.1" 200 147
+0:0:0:0:0:0:0:1 - - [28/Oct/2018:16:27:47 +0530] "GET /com.plivo.contacts/plivo/Operate/sud42@abc.com/searchbyemail HTTP/1.1" 200 147
+0:0:0:0:0:0:0:1 - - [28/Oct/2018:16:31:24 +0530] "POST /com.plivo.contacts/plivo/Operate/updateContact HTTP/1.1" 500 8872
+127.0.0.1 - - [28/Oct/2018:16:33:27 +0530] "GET / HTTP/1.1" 404 1074
+127.0.0.1 - - [28/Oct/2018:16:33:27 +0530] "GET /com.plivo.contacts/ HTTP/1.1" 404 1097
+0:0:0:0:0:0:0:1 - - [28/Oct/2018:16:34:22 +0530] "POST /com.plivo.contacts/plivo/Operate/updateContact HTTP/1.1" 200 58
+0:0:0:0:0:0:0:1 - - [28/Oct/2018:16:34:51 +0530] "POST /com.plivo.contacts/plivo/Operate/deleteContact HTTP/1.1" 200 55
+0:0:0:0:0:0:0:1 - - [28/Oct/2018:16:36:30 +0530] "POST /com.plivo.contacts/plivo/Operate/addContact HTTP/1.1" 200 59
+0:0:0:0:0:0:0:1 - - [28/Oct/2018:16:38:28 +0530] "POST /com.plivo.contacts/plivo/Operate/addContact HTTP/1.1" 200 54
+0:0:0:0:0:0:0:1 - - [28/Oct/2018:16:39:02 +0530] "POST /com.plivo.contacts/plivo/Operate/addContact HTTP/1.1" 400 -
