@@ -26,8 +26,7 @@ import javax.ws.rs.ext.Provider;
 import com.plivo.contacts_DataAccess.UserAccess;
 import com.plivo.contacts_Model.PasswordSet;
 import com.plivo.contacts_Model.User;
-import com.plivo.contacs_passwordManagement.*;
-
+import com.plivo.contacts_passwordManagement.*;
 import com.sun.jersey.core.util.Base64;
 
 @Provider
@@ -43,7 +42,8 @@ public class UserAuthenticationFilter implements javax.servlet.Filter
 		private static final Response ACCESS_FORBIDDEN = Response.status(Response.Status.FORBIDDEN)
                 .entity("Access blocked for all users !!").build();
 		
-		
+		// once chuck norris tried to mock httprequest and legend says that he is still writing 
+		// expectation rules for the mock. :) No unit tests.
 		@Override
 		public void doFilter(ServletRequest request, ServletResponse response, FilterChain filter)
 				throws IOException, ServletException {
@@ -93,8 +93,8 @@ public class UserAuthenticationFilter implements javax.servlet.Filter
 	    {
 	    	//String dummyUser = "krishna";
             //String dummyPswd = "radha";
-	        
-	        PasswordSet p = UserAccess.fetchUser(username);
+	        UserAccess ua = new UserAccess();
+	        PasswordSet p = ua.fetchUser(username);
 	        String passwordcheck = PasswordManagement.checkPassword(password, p.salt);
 	        //Step 1. Fetch password from database and match with password in argument
 	        //If both match then get the defined role for user from database and continue; else return isAllowed [false]

@@ -13,21 +13,38 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;  
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import com.plivo.contacs_passwordManagement.PasswordManagement;
 import com.plivo.contacts_Model.Contact;
 import com.plivo.contacts_Model.PasswordSet;
-import com.plivo.contacts_Model.User;  
+import com.plivo.contacts_Model.User;
+import com.plivo.contacts_passwordManagement.PasswordManagement;  
 
 
 public class ContactAccess {
 	
-	
+	StandardServiceRegistryBuilder ssrb;
+	StandardServiceRegistry ssr;
+	Metadata meta;
 	SessionFactory factory;
+	Session session;
+	Transaction t;
+	Query q;
 	public ContactAccess() {
 		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("./com/plivo/contacts_DataAccess/hibernate.cfg.xml").build();  
         Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
         factory = meta.getSessionFactoryBuilder().build();
 	}
+	
+	public ContactAccess(StandardServiceRegistryBuilder ssrb,StandardServiceRegistry ssr,Metadata meta,
+			SessionFactory factory,Session session,Transaction t,Query q) {
+		this.ssrb = ssrb;
+		this.ssr = ssr;
+		this.meta = meta;
+		this.factory = factory;
+		this.session = session;
+		this.t= t;
+		this.q = q;
+	}
+	
 	public int addContact(Contact ctct) {
 		
 		String name = ctct.getName();
@@ -35,10 +52,10 @@ public class ContactAccess {
 		String phone = ctct.getPhone_no();
 		String address = ctct.getAddress();
 		
-		Session session = factory.openSession();  
-	    Transaction t = session.beginTransaction();
+		session = factory.openSession();  
+	    t = session.beginTransaction();
 	    
-	    Query q = session.createQuery("from Contact where email = :email");
+	    q = session.createQuery("from Contact where email = :email");
 	    q.setString("email", email);
 	    List<Contact> cl = q.list();
 	    if(cl.isEmpty())
@@ -61,10 +78,10 @@ public class ContactAccess {
 	
 	public int deleteContact(String email) {
 		try {  
-		    Session session = factory.openSession();  
-		    Transaction t = session.beginTransaction();
+		    session = factory.openSession();  
+		    t = session.beginTransaction();
 		    
-		    Query q = session.createQuery("from Contact where email = :email");
+		    q = session.createQuery("from Contact where email = :email");
 		    q.setString("email", email);
 		    List<Contact> cl = q.list();
 		    if(cl.isEmpty()) {
@@ -88,10 +105,10 @@ public class ContactAccess {
 		String phone = c.getPhone_no();
 		String address = c.getAddress();
 		
-	    Session session = factory.openSession();  
-	    Transaction t = session.beginTransaction();
+	    session = factory.openSession();  
+	    t = session.beginTransaction();
 	    
-	    Query q = session.createQuery("from Contact where email = :email");
+	    q = session.createQuery("from Contact where email = :email");
 	    q.setString("email", email);
 	    List<Contact> cl = q.list();
 	    if(cl.isEmpty()) {
@@ -110,9 +127,9 @@ public class ContactAccess {
 	}
 	
 	public Contact getContactByEmail(String email){
-		Session session = factory.openSession();  
-	    Transaction t = session.beginTransaction();
-	    Query q = session.createQuery("from Contact where email = :email");
+		session = factory.openSession();  
+	    t = session.beginTransaction();
+	    q = session.createQuery("from Contact where email = :email");
 	    q.setString("email", email);
 	    Contact c = (Contact)q.uniqueResult();
 	    
@@ -121,11 +138,11 @@ public class ContactAccess {
 	
 	public List<Contact> getContactByName(String name, int pageSize, int startVal){
 		
-		Session session = factory.openSession();  
-	    Transaction t = session.beginTransaction();
+		session = factory.openSession();  
+	    t = session.beginTransaction();
 		List<Contact> lc;
 		
-		Query q = session.createQuery("from Contact where name = :name");
+		q = session.createQuery("from Contact where name = :name");
 	    q.setString("name", name);
 	    q.setFirstResult(startVal); //starts with 0
 		q.setMaxResults(pageSize);
@@ -135,11 +152,11 @@ public class ContactAccess {
 	}
 	
 	public List<Contact> getContacts(int pageSize, int startVal){
-		Session session = factory.openSession();  
-	    Transaction t = session.beginTransaction();
+		session = factory.openSession();  
+	    t = session.beginTransaction();
 		List<Contact> lc;
 		
-		Query q = session.createQuery("from Contact");
+		q = session.createQuery("from Contact");
 	    q.setFirstResult(startVal); //starts with 0
 		q.setMaxResults(pageSize);
 	    lc = q.list();

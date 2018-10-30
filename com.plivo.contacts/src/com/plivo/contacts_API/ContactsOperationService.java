@@ -17,13 +17,23 @@ import com.plivo.contacts_Model.*;
 @Path("/Operate")
 public class ContactsOperationService {
 	
+	private ContactAccess ca;
+	
+	public ContactsOperationService() {
+		ca = new ContactAccess();
+	}
+	
+	public ContactsOperationService(ContactAccess ca) {
+		this.ca = ca;
+	}
+	
 	@POST
     @Path("/addContact")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	public Response addContact(Contact c) {
 		Response response = new Response();
-		ContactAccess ca = new ContactAccess();
+		
 		int retVal = ca.addContact(c);
 		if(retVal == 1) {
 			response.setMessage("Contact added");
@@ -45,7 +55,7 @@ public class ContactsOperationService {
 		Response response = new Response();
 		try {
 			
-			ContactAccess ca = new ContactAccess();
+			
 			int retVal = ca.deleteContact(email);
 			if(retVal == 1) {
 				response.setMessage("Delete Successful");
@@ -70,7 +80,7 @@ public class ContactsOperationService {
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	public Response updateContact(Contact c){
 		Response response = new Response();
-		ContactAccess ca = new ContactAccess();
+		
 		int retVal = ca.updateContact(c);
 		if(retVal == 1) {
 			response.setMessage("Update Successful");
@@ -88,7 +98,7 @@ public class ContactsOperationService {
 	@Path("/{id}/searchbyemail")
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	public Contact searchUsersByEmail(@PathParam("id") String email){
-		ContactAccess ca = new ContactAccess();
+		
 		Contact c = ca.getContactByEmail(email);
 		return c;
 	}
@@ -100,7 +110,7 @@ public class ContactsOperationService {
 											@QueryParam("pageSize") int pageSize,
 											@QueryParam("pageStart") int pageStart){
 		if(pageSize == 0) pageSize = 10;
-		ContactAccess ca = new ContactAccess();
+		
 		List<Contact> cl = ca.getContactByName(name, pageSize, pageStart);
 		return cl;
 	}
@@ -111,7 +121,7 @@ public class ContactsOperationService {
 	public List<Contact> getAllUsers(@QueryParam("pageSize") int pageSize,
 											@QueryParam("pageStart") int pageStart){
 		if(pageSize == 0) pageSize = 10;
-		ContactAccess ca = new ContactAccess();
+		
 		List<Contact> cl = ca.getContacts(pageSize, pageStart);
 		return cl;
 	}

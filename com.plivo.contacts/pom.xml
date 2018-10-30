@@ -78,10 +78,30 @@
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl -->
 		<dependency>
-		
-		    <groupId>org.codehaus.jackson</groupId>
+			<groupId>org.codehaus.jackson</groupId>
 		    <artifactId>jackson-mapper-asl</artifactId>
 		    <version>1.9.12</version>
 		</dependency>
+		<dependency>
+		  <groupId>org.easymock</groupId>
+		  <artifactId>easymock</artifactId>
+		  <version>4.0</version>
+		  
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.objenesis/objenesis -->
+		<dependency>
+		    <groupId>org.objenesis</groupId>
+		    <artifactId>objenesis</artifactId>
+		    <version>3.0.1</version>
+		    
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>4.11</version>
+		    
+		</dependency>
+		
 	</dependencies>
 </project>

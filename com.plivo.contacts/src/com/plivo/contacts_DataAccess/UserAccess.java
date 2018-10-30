@@ -1,7 +1,7 @@
 package com.plivo.contacts_DataAccess;
-import com.plivo.contacs_passwordManagement.*;
 import com.plivo.contacts_Model.PasswordSet;
 import com.plivo.contacts_Model.User;
+import com.plivo.contacts_passwordManagement.*;
 
 import java.util.List;
 
@@ -17,13 +17,36 @@ import java.util.Random;
 
 
 public class UserAccess {
-	public static void addUser(String userName, String password) {
+	
+	StandardServiceRegistryBuilder ssrb;
+	StandardServiceRegistry ssr;
+	Metadata meta;
+	SessionFactory factory;
+	Session session;
+	Transaction t;
+	Query q;
+	public UserAccess() {
+		ssr = new StandardServiceRegistryBuilder().configure("./com/plivo/contacts_DataAccess/hibernate.cfg.xml").build();  
+        meta = new MetadataSources(ssr).getMetadataBuilder().build(); 
+	    factory = meta.getSessionFactoryBuilder().build(); 
+	}
+	
+	public UserAccess(StandardServiceRegistryBuilder ssrb,StandardServiceRegistry ssr,Metadata meta,
+			SessionFactory factory,Session session,Transaction t,Query q) {
+		this.ssrb = ssrb;
+		this.ssr = ssr;
+		this.meta = meta;
+		this.factory = factory;
+		this.session = session;
+		this.t= t;
+		this.q = q;
+	}
+	
+	
+	public void addUser(String userName, String password) {
 		
 		PasswordSet p = PasswordManagement.encryptPassword(password);
-		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("./com/plivo/contacts_DataAccess/hibernate.cfg.xml").build();  
-        Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();  
-      
-	    SessionFactory factory = meta.getSessionFactoryBuilder().build();  
+		 
 	    Session session = factory.openSession();  
 	    Transaction t = session.beginTransaction();  
 	    
@@ -40,16 +63,13 @@ public class UserAccess {
 	    }	
 	}
 	
-	public static PasswordSet fetchUser(String userName) {
+	public PasswordSet fetchUser(String userName) {
 		
 		PasswordSet p = new PasswordSet();
-		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("./com/plivo/contacts_DataAccess/hibernate.cfg.xml").build();  
-        Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();  
-      
-	    SessionFactory factory = meta.getSessionFactoryBuilder().build();  
-	    Session session = factory.openSession();  
-	    Transaction t = session.beginTransaction();  
-	    Query q = session.createQuery("from User where email = :username");
+		
+	    session = factory.openSession();  
+	    t = session.beginTransaction();  
+	    q = session.createQuery("from User where email = :username");
 	    q.setString("username", userName);
 	    List<User> ul = q.list();
 	    if(ul.isEmpty()) {

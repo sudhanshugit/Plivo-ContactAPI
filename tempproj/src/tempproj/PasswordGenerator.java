@@ -10,7 +10,12 @@ import com.plivo.contacs_passwordManagement.*;
 public class PasswordGenerator {
 
 	public static void main(String[] args) {
-		PasswordSet p1 = PasswordManagement.encryptPassword("plivo_user1");
+		
+		PasswordSet ps = PasswordManagement.encryptPassword("something");
+		System.out.println(ps.encryptedPassword);
+		
+		
+		/*PasswordSet p1 = PasswordManagement.encryptPassword("plivo_user1");
 		//String s = new String(p.salt, Charset.forName("UTF-8"));
 		String username1 = "user1@abc";
 		PasswordSet p2 = PasswordManagement.encryptPassword("plivo_user1");
@@ -71,7 +76,7 @@ public class PasswordGenerator {
 			
 			con.close();  
 			}catch(Exception e){ System.out.println(e);}  
-			
+			*/
 		
 
 	}

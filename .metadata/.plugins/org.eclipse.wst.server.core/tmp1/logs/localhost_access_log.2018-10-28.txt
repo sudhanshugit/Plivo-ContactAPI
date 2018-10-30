@@ -13,3 +13,4 @@
 0:0:0:0:0:0:0:1 - - [28/Oct/2018:16:36:30 +0530] "POST /com.plivo.contacts/plivo/Operate/addContact HTTP/1.1" 200 59
 0:0:0:0:0:0:0:1 - - [28/Oct/2018:16:38:28 +0530] "POST /com.plivo.contacts/plivo/Operate/addContact HTTP/1.1" 200 54
 0:0:0:0:0:0:0:1 - - [28/Oct/2018:16:39:02 +0530] "POST /com.plivo.contacts/plivo/Operate/addContact HTTP/1.1" 400 -
+192.168.1.7 - - [28/Oct/2018:18:39:02 +0530] "GET /com.plivo.contacts/plivo/Operate/sud2@abc.com/searchbyemail HTTP/1.1" 200 145
