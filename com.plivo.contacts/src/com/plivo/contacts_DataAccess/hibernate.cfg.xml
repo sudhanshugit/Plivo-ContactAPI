@@ -8,7 +8,7 @@
         <property name="hbm2ddl.auto">update</property>  
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property> 
          
-        <property name="connection.url">jdbc:mysql://localhost:3306/Plivo</property>  
+        <property name="connection.url">jdbc:mysql://plivo.cdzakexehyvq.us-west-2.rds.amazonaws.com:3306/Plivo</property>  
         <property name="connection.username">user1_plivo</property>  
         <property name="connection.password">user_plivo</property>  
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>  

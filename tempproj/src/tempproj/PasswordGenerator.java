@@ -11,27 +11,27 @@ public class PasswordGenerator {
 
 	public static void main(String[] args) {
 		
-		PasswordSet ps = PasswordManagement.encryptPassword("something");
-		System.out.println(ps.encryptedPassword);
+		//PasswordSet ps = PasswordManagement.encryptPassword("something");
+		//System.out.println(ps.encryptedPassword);
 		
 		
-		/*PasswordSet p1 = PasswordManagement.encryptPassword("plivo_user1");
+		PasswordSet p1 = PasswordManagement.encryptPassword("plivo_user1");
 		//String s = new String(p.salt, Charset.forName("UTF-8"));
-		String username1 = "user1@abc";
+		String username1 = "user5@abc";
 		PasswordSet p2 = PasswordManagement.encryptPassword("plivo_user1");
 		//String s = new String(p.salt, Charset.forName("UTF-8"));
-		String username2 = "user2@abc";
+		String username2 = "user6@abc";
 		PasswordSet p3 = PasswordManagement.encryptPassword("plivo_user1");
 		//String s = new String(p.salt, Charset.forName("UTF-8"));
-		String username3 = "user3@abc";
+		String username3 = "user7@abc";
 		PasswordSet p4 = PasswordManagement.encryptPassword("plivo_user1");
 		//String s = new String(p.salt, Charset.forName("UTF-8"));
-		String username4 = "user4@abc";
+		String username4 = "user8@abc";
 		
 		try{  
 			Class.forName("com.mysql.jdbc.Driver");  
 			Connection con=DriverManager.getConnection(  
-			"jdbc:mysql://localhost:3306/Plivo","user1_plivo","user_plivo");  
+			"jdbc:mysql://plivo.cdzakexehyvq.us-west-2.rds.amazonaws.com:3306/Plivo","user1_plivo","user_plivo");  
 			//here sonoo is database name, root is username and password  
 			Statement stmt=con.createStatement();  
 			String query = "insert into users (email, name, password,password_salt) values (?,?,?,?)";
@@ -76,7 +76,7 @@ public class PasswordGenerator {
 			
 			con.close();  
 			}catch(Exception e){ System.out.println(e);}  
-			*/
+			
 		
 
 	}
