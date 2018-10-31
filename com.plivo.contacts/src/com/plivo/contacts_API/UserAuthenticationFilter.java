@@ -27,7 +27,8 @@ import com.plivo.contacts_DataAccess.UserAccess;
 import com.plivo.contacts_Model.PasswordSet;
 import com.plivo.contacts_Model.User;
 import com.plivo.contacts_passwordManagement.*;
-import com.sun.jersey.core.util.Base64;
+//import com.sun.jersey.core.util.Base64;
+import java.util.Base64;
 
 @Provider
 public class UserAuthenticationFilter implements javax.servlet.Filter
@@ -62,7 +63,14 @@ public class UserAuthenticationFilter implements javax.servlet.Filter
 	            }
 				else
 				{
-					final String usernameAndPassword = authorization.replaceFirst(AUTHENTICATION_SCHEME + " ", "");
+					final String encodedUserPassword = authorization.replaceFirst("Basic"
+							+ " ", "");
+					byte[] decodedBytes = Base64.getDecoder().decode(
+							encodedUserPassword);
+					final String usernameAndPassword = new String(decodedBytes, "UTF-8");
+					
+					
+					//final String usernameAndPassword = .replaceFirst(AUTHENTICATION_SCHEME + " ", "");
 		            final StringTokenizer tokenizer = new StringTokenizer(usernameAndPassword, ":");
 		            final String username = tokenizer.nextToken();
 		            final String password = tokenizer.nextToken();
